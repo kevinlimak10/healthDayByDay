@@ -1,11 +1,30 @@
-const { createServer } = require('node:http');
-const hostname = '127.0.0.1';
-const port = 3000;
-const server = createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World');
+const http = require('http');
+
+// Create an HTTP server
+const server = http.createServer((req, res) => {
+    // Set content type to plain text
+    res.setHeader('Content-Type', 'text/plain');
+
+    // Routing
+    if (req.url === '/') {
+        // Handling GET request to '/'
+        res.statusCode = 200;
+        res.end('Hello, it\'s the health-day-by-day server');
+    } else if (req.url === '/routine') {
+        // Handling GET request to '/routine'
+        res.statusCode = 200;
+        res.end('Mocked routine');
+    } else {
+        // Handling unknown routes
+        res.statusCode = 404;
+        res.end('Not Found');
+    }
 });
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+
+// Define the port to listen on
+const PORT = process.env.PORT || 3000;
+
+// Start the server
+server.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
