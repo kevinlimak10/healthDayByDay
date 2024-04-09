@@ -59,7 +59,7 @@ jobs:
           mkdir temp
           unzip release.zip -d ./temp
           ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
-          cp ./temp/api/ ./
+          cp -r ./temp/api/* .
           rm -rf temp
           
       
