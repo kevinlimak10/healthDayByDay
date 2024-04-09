@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  font-family: Arial, sans-serif;
+}
+.container {
+  width: 300px;
+  margin: 0 auto;
+}
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.note-title {
+  margin-bottom: 10px;
+}
+.notes {
+  margin-top: 20px;
+}
+.note {
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+.note:hover {
+  background-color: #f5f5f5;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1 class="title">Habitos saudaveis</h1>
+  <input id="note-title" type="text" placeholder="Habito">
+  <button id="save-button">Salvar</button>
+  <div id="notes" class="notes"></div>
+</div>
+
+<script>
+// Get the necessary elements
+const noteTitle = document.getElementById('note-title');
+const saveButton = document.getElementById('save-button');
+const notes = document.getElementById('notes');
+
+// Add an event listener to the save button
+saveButton.addEventListener('click', () => {
+  // Create a new note
+  const newNote = document.createElement('p');
+  newNote.textContent = `${noteTitle.value}`;
+  newNote.classList.add('note');
+
+  // Add an event listener to the new note for deleting it
+  newNote.addEventListener('click', () => {
+    notes.removeChild(newNote);
+  });
+
+  // Add the new note to the notes div
+  notes.appendChild(newNote);
+
+  // Clear the input field
+  noteTitle.value = '';
+});
+</script>
+</body>
+</html>
